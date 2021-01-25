@@ -38,23 +38,6 @@ const fakeData = [...testes];
 
 // TODO PASSAR PARA FIREBASE (dai muda essa logica estranha daqui...)
 app.get('/ranking', async (request, response) => {
-  // const pitch = [...fakeData].sort((a, b) => {
-  //   if (a.classification.pitch > b.classification.pitch) return 1;
-  //   if (a.classification.pitch > b.classification.pitch) return -1;
-  //   return 0;
-  // });
-
-  // const proposta = [...fakeData].sort((a, b) => {
-  //   if (a.classification.pitch > b.classification.proposta) return 1;
-  //   if (a.classification.pitch > b.classification.proposta) return -1;
-  //   return 0;
-  // });
-
-  // const dev = [...fakeData].sort((a, b) => {
-  //   if (a.classification.dev > b.classification.dev) return 1;
-  //   if (a.classification.dev > b.classification.dev) return -1;
-  //   return 0;
-  // });
   const ranks = { pitch: [], proposta: [], dev: [] };
 
   fakeData.forEach((f) => {
