@@ -8,7 +8,9 @@ import './star.css';
 
 // TODO: Poder votar rate quebrado, e.g: 3.5, 4.5 etc...
 
-function RankingStars({ half, filled, onClick }) {
+function RankingStars({
+  half, filled, onClick, disabled,
+}) {
   if (half && !filled) {
     return (
       <svg
@@ -16,7 +18,7 @@ function RankingStars({ half, filled, onClick }) {
         xmlns="http://www.w3.org/2000/svg"
         width="30"
         height="30"
-        className="star-ranking"
+        className={disabled ? '' : 'star-ranking'}
         onClick={onClick}
       >
         <defs>
@@ -41,7 +43,7 @@ function RankingStars({ half, filled, onClick }) {
       xmlns="http://www.w3.org/2000/svg"
       width="30"
       height="30"
-      className="star-ranking"
+      className={disabled ? '' : 'star-ranking'}
       fill={filled ? '#fbff00' : '#e0e0e0'}
       onClick={onClick}
     >
@@ -58,10 +60,12 @@ RankingStars.propTypes = {
   filled: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   half: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 RankingStars.defaultProps = {
   half: false,
+  disabled: false,
 };
 
 export default RankingStars;

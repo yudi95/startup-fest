@@ -16,6 +16,16 @@ export default () => {
     return res.json();
   };
 
+  const getRankingList = async () => {
+    const res = await fetch(`${url}/ranking`, {
+      headers: {
+        'Content-Type': 'application/json',
+        mode: 'cors',
+      },
+    });
+    return res.json();
+  };
+
   const rateStartup = async (startupId, type, rate) => {
     const res = await fetch(`${url}/${startupId}/rate`, {
       headers: {
@@ -32,6 +42,7 @@ export default () => {
   return {
     getStartupList,
     getStartup,
+    getRankingList,
     rateStartup,
   };
 };

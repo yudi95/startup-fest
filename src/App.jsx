@@ -5,16 +5,23 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
-import StartupPage from './pages/StartupPage';
+import Ranking from './pages/Ranking';
+// import StartupPage from './pages/StartupPage';
+
+import GlobalStyles from './styles/global';
 
 function App() {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Header />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/startup/:sid" component={StartupPage} />
-      </Switch>
+      <main>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/ranking" component={Ranking} />
+          {/* <Route path="/startup/:sid" component={StartupPage} /> */}
+        </Switch>
+      </main>
     </BrowserRouter>
   );
 }

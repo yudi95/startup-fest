@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
 import { Card, ImageWrapper } from './styled';
-import StartupPage from '../../pages/StartupPage';
+// import StartupPage from '../../pages/StartupPage';
 import StartupModal from '../StartupModal';
 
 // eslint-disable-next-line object-curly-newline
@@ -34,6 +34,7 @@ function StartupCard({ startup }) {
               boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)',
               width: '100%',
               height: 175,
+              borderRadius: 10,
             }}
           />
         </ImageWrapper>

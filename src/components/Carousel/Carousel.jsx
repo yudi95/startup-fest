@@ -1,6 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Item, Slider, SliderWrapper } from './styled';
+import {
+  Item, Slider, SliderWrapper, BtnLeft, BtnRight,
+} from './styled';
+
+// icons
+import LeftArrow from '../../assets/icons/LeftArrow';
+import RightArrow from '../../assets/icons/RightArrow';
 
 const Carousel = ({
   children, smooth, height, width, wheel,
@@ -14,9 +20,9 @@ const Carousel = ({
     if (!wheel) return;
     const { deltaY } = e;
     if (deltaY > 0) { // para baixo -> para direita.
-      sliderRef.current.scrollLeft += sliderRef.current.offsetWidth * coeficienteMovimento;
+      sliderRef.current.scrollLeft += (sliderRef.current.offsetWidth * coeficienteMovimento) + 9;
     } else { // para cima -> para esquerda
-      sliderRef.current.scrollLeft -= sliderRef.current.offsetWidth * coeficienteMovimento;
+      sliderRef.current.scrollLeft -= (sliderRef.current.offsetWidth * coeficienteMovimento) + 9;
     }
   };
   const renderChildrens = (c) => {
@@ -33,6 +39,14 @@ const Carousel = ({
         {c}
       </Item>
     );
+  };
+
+  const moveLeft = () => {
+    sliderRef.current.scrollLeft -= sliderRef.current.offsetWidth + 12;
+  };
+
+  const moveRigth = () => {
+    sliderRef.current.scrollLeft += sliderRef.current.offsetWidth + 12;
   };
 
   useEffect(() => {
@@ -54,8 +68,12 @@ const Carousel = ({
       >
         {renderChildrens(children)}
       </Slider>
-      {/* <BtnRight />
-      <BtnLeft /> */}
+      <BtnRight className="btn-steps" onClick={moveRigth}>
+        <RightArrow />
+      </BtnRight>
+      <BtnLeft className="btn-steps" onClick={moveLeft}>
+        <LeftArrow />
+      </BtnLeft>
     </SliderWrapper>
   );
 };

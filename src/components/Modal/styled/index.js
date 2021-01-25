@@ -18,10 +18,22 @@ export const ModalCard = Styled.div`
   margin: auto;
   overflow-y: hidden;
   overflow-x: auto;
-  /* padding: 20px; */
   border: 1px solid #888;
-  width: 50%;
-  min-height: 400px;
+
+  /* width: 50%; */
+  max-width: 1074px;
+  @media screen and (max-width: 1024px) {
+      width: 700px;
+  }
+
+  @media screen and (max-width: 800px) {
+      width: 600px;
+  }
+
+  @media screen and (max-width: 600px) {
+      width: 90vw;
+  }
+
 `;
 
 export const ModalHeader = Styled.div`
@@ -29,16 +41,17 @@ export const ModalHeader = Styled.div`
   height: 50px;
   position: relative;
   color: white;
-  font-size: 29px;
-  font-weight: bolder;
-  background-color: #162b52; //#496599
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 8px;
+  background-color: #31263E;//#575982; //#496599
   align-items: center;
   display: flex;
   justify-content: center;
 `;
 
 export const ModalContent = Styled.div`
-
+  padding: 10px 30px;
 
 `;
 

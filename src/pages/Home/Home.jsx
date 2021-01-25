@@ -5,6 +5,8 @@ import API from '../../services/startups';
 import Carousel from '../../components/Carousel';
 import StartupCard from '../../components/StartupCard';
 
+// TODO: implementar resposta cacheada?
+
 function Home() {
   const startUpApi = API();
   const [startups, setStartups] = useState([]);
@@ -16,8 +18,12 @@ function Home() {
       try {
         const res = await startUpApi.getStartupList();
         console.log(res);
-        setStartups(res);
-        setLoading(false);
+        if (res.message) {
+          setLoading(false);
+        } else {
+          setStartups(res);
+          setLoading(false);
+        }
       } catch (er) {
         console.log(er);
         setLoading(false);
@@ -28,10 +34,7 @@ function Home() {
 
   return (
     <div>
-      <div style={{
-        display: 'flex', justifyContent: 'start', marginLeft: 80, marginTop: 40, marginBottom: 80,
-      }}
-      >
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '50px 0px' }}>
         <h3> Escolha uma Startup para votar! </h3>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>

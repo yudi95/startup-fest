@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,13 +9,13 @@ import startUpApi from '../../services/startups';
 import Modal from '../Modal';
 import RankingStars from '../RankingStars';
 
-// import { Container } from './styles';
+import { ModalRating } from './styled';
 
 function StartupModal({ startupId, open, closeModal }) {
   const [startup, setStartup] = useState({});
 
   const api = startUpApi();
-  const ratefunc = async (type, rate) => api.rateStartup(startup.id, type, rate);
+  const ratefunc = async (type, rate) => api.rateStartup(startupId, type, rate);
 
   useEffect(() => {
     (async () => {
@@ -24,47 +25,45 @@ function StartupModal({ startupId, open, closeModal }) {
   }, []);
 
   return (
-    <Modal closeModal={closeModal} open={open} title={startup.startup_name}>
-      <div style={{ padding: 30 }}>
-        <div style={{
-          color: 'black',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          marginBottom: 15,
-        }}
-        >
+    <Modal closeModal={closeModal} open={open} title="Votação">
+      <ModalRating>
+        <span className="startup-name">
           {startup.startup_name}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center', fontSize: 15 }}>
+        </span>
+
+        <span className="description">
           {startup.description}
-        </div>
-        {/* ESTRELAS RATE */}
+        </span>
 
-        <div>
-          <h3>
-            <b>Vote clicando nas estrelas da categoria desejada! </b>
-          </h3>
+        <h3 className="voting-text">
+          Vote clicando nas estrelas da categoria desejada!
+        </h3>
+
+        <div className="stars-container">
+
+          <div className="stars-item">
+            <span> Apresentação: </span>
+            <RankingStars rate={startup?.classification?.pitch} rateFunc={ratefunc} type="pitch" />
+          </div>
+
+          <div className="stars-item">
+            <span> Proposta: </span>
+            <RankingStars rate={startup?.classification?.proposta} rateFunc={ratefunc} type="proposta" />
+          </div>
+
+          <div className="stars-item">
+            <span> Desenvolvimento: </span>
+            <RankingStars rate={startup?.classification?.dev} rateFunc={ratefunc} type="dev" />
+          </div>
+
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <span style={{ display: 'flex', justifyContent: 'center', width: '50%' }}> Apresentação: </span>
-          <div style={{ display: 'flex', justifyContent: 'flex-starts', width: '50%' }}>
-            <RankingStars rate={2} rateFunc={ratefunc} type="pitch" />
-          </div>
+        <div className="btn-startup">
+          <button type="button" onClick={closeModal}>
+            Ok
+          </button>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <span style={{ display: 'flex', justifyContent: 'center', width: '50%' }}> Proposta: </span>
-          <div style={{ display: 'flex', justifyContent: 'flex-starts', width: '50%' }}>
-            <RankingStars rate={2} rateFunc={ratefunc} type="proposta" />
-          </div>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <span style={{ display: 'flex', justifyContent: 'center', width: '50%' }}> Desenvolvimento: </span>
-          <div style={{ display: 'flex', justifyContent: 'flex-starts', width: '50%' }}>
-            <RankingStars rate={2} rateFunc={ratefunc} type="dev" />
-          </div>
-        </div>
-      </div>
+      </ModalRating>
     </Modal>
   );
 }

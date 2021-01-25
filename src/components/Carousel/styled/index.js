@@ -4,12 +4,13 @@ export const Item = Styled.div`
     width: 100%;
     height: 100%;
     text-align: center;
+    margin: 0px 4px;
     &:focus {
       outline: none;
     }
     /* border: 1px solid black; */
     /* flex: none; */
-    /* scroll-snap-align: start; // para criar "âncoras" nos itens. funciona com o scroll-snap-type */
+    scroll-snap-align: start; // para criar "âncoras" nos itens. funciona com o scroll-snap-type
     /* pointer-events: none; */
 `;
 
@@ -34,15 +35,52 @@ export const SliderWrapper = Styled.div`
     height: ${(props) => props.height || '200px'};
     /* border: 0.5px solid gray; */
 
+    padding: 0px 50px;
     text-align: center;
     overflow: hidden;
     position: relative;
     text-align: center;
     overflow: hidden;
 
+    
+    @media screen and (max-width: 600px) {
+        /* top: 98%; */
+        padding: 0;
+    }
+
     &:focus {
       outline: none;
     }
+
+    .btn-steps {
+      border: none;
+      display: flex;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      justify-content: center;
+      border-radius: 50%;
+      outline: none;
+      cursor: pointer;
+      background-color: #6C6EA0;
+
+
+      &:hover {
+        background-color: #575982;
+        box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+          0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+      }
+
+      &:active {
+        background-color: #575982;
+        box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2),
+          0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+      }
+
+      /* & svg > path {
+        fill: white;
+      } */
+  }
 `;
 
 export const ButtonsWrapper = Styled.ol`
@@ -73,4 +111,18 @@ export const SliderButton = Styled.li`
         background-color: #fff;
     }
     
+`;
+
+export const BtnRight = Styled.button`
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const BtnLeft = Styled.button`
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;

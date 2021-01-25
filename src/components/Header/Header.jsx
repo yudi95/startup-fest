@@ -25,18 +25,20 @@ const HeaderLinkButton = ({ children, to, activeOnlyWhenExact }) => {
 function Header() {
   return (
     <HeaderBar>
-      <div style={{ marginLeft: 50, minWidth: 250, display: 'flex' }}>
-        <h1>
-          <b> StartUp Fest </b>
-        </h1>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <HeaderLinkButton to="/" activeOnlyWhenExact>
-          StartUps
-        </HeaderLinkButton>
-        <HeaderLinkButton to="/ranking">
-          Ranking
-        </HeaderLinkButton>
+      <div className="header-wrapper">
+        <div>
+          <h1>
+            <b> StartUp Fest </b>
+          </h1>
+        </div>
+        <div className="header-links">
+          <HeaderLinkButton to="/" activeOnlyWhenExact>
+            StartUps
+          </HeaderLinkButton>
+          <HeaderLinkButton to="/ranking">
+            Ranking
+          </HeaderLinkButton>
+        </div>
       </div>
     </HeaderBar>
   );
