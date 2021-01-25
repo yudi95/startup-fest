@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import API from '../../api/startups';
+import API from '../../services/startups';
+
+// components
+import Carousel from '../../components/Carousel';
 import StartupCard from '../../components/StartupCard';
 
 function Home() {
@@ -25,14 +28,16 @@ function Home() {
 
   return (
     <div>
-      {error && (
-        <h3>
-          Alguma coisa aconteceu. Tente novamente mais tarde
-        </h3>
-      )}
-
-      <div style={{ display: 'flex' }}>
-        {startups.map((s) => <StartupCard startup={s} />)}
+      <div style={{
+        display: 'flex', justifyContent: 'start', marginLeft: 80, marginTop: 40, marginBottom: 80,
+      }}
+      >
+        <h3> Escolha uma Startup para votar! </h3>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Carousel wheel width="80vw" height="250" smooth>
+          {startups.map((s, i) => <StartupCard startup={{ ...s, id: `${i}` }} key={s.startup_name} />)}
+        </Carousel>
       </div>
     </div>
   );

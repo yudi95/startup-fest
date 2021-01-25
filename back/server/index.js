@@ -16,56 +16,41 @@ const jsonParser = bodyParser.json();
 app.use(jsonParser);
 
 const consoles = (req, response) => {
-  console.log(req.url);
-  console.log(req.method);
+  console.log({ url: req.url, method: req.method });
   req.next();
 };
 
 app.use(consoles);
 
-const startupApi = 'https://5pnnhw5h8d.execute-api.us-east-1.amazonaws.com/v1';
-const headers = { 'x-api-key': 'gWhX2S1Qzj2SJVpFuSITV2FFBryWwCdf3T4FtAee' };
-const getOpt = { ...headers, method: 'GET' };
+// const startupApi = 'https://5pnnhw5h8d.execute-api.us-east-1.amazonaws.com/v1';
+// const headers = { 'x-api-key': 'gWhX2S1Qzj2SJVpFuSITV2FFBryWwCdf3T4FtAee' };
+// const getOpt = { ...headers, method: 'GET' };
 
-const testes = [{
-  startup_name: 'Biolife',
-  category: 'Biotech',
-  city: 'São Carlos - SP',
-  thumbnail: 'https://s3.amazonaws.com/desafio.softable/assets/startup_1.jpg',
-  description: 'Biolife - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irur ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-},
-{
-  startup_name: '2',
-  category: 'Biotech',
-  city: 'São Carlos - SP',
-  thumbnail: 'https://s3.amazonaws.com/desafio.softable/assets/startup_1.jpg',
-  description: 'Biolife - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irur ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-},
-{
-  startup_name: '3',
-  category: 'Biotech',
-  city: 'São Carlos - SP',
-  thumbnail: 'https://s3.amazonaws.com/desafio.softable/assets/startup_1.jpg',
-  description: 'Biolife - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irur ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-},
-];
+const testes = require('./fakeData');
 
-app.get('/', async (req, response) => {
-  // const raw = await fetch(startupApi, getOpt);
-  // const startups = await raw.json();
-  // console.log(startups);
-  // response.status(200).send(startups);
-  response.status(200).send(testes);
-});
+const fakeData = [...testes];
+
+app.get('/', async (req, response) => response.status(200).send(fakeData));
+// const raw = await fetch(startupApi, getOpt);
+// const startups = await raw.json();
+// console.log(startups);
+// response.status(200).send(startups);
 
 app.get('/:startupId', async (request, response) => {
   // console.log('especifico');
-  // const { startupId } = request.params;
+  const { startupId } = request.params;
   // const raw = await fetch(`${startupApi}/${startupId}`, getOpt);
   // const startups = await raw.json();
   // console.log(startups);
   // response.status(200).send(startups);
-  response.status(200).send(testes[0]);
+  return response.status(200).send(fakeData[startupId]);
+});
+
+app.post('/:startupId/rate', async (request, response) => {
+  const { startupId } = request.params;
+  const { rate, type } = request.body;
+  fakeData[startupId].classification[type] = rate;
+  return response.status(200).send(fakeData[startupId]);
 });
 
 app.listen(port, () => {

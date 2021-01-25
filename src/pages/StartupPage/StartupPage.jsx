@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import startupApi from '../../api/startups';
+import startupApi from '../../services/startups';
 
-function Startup() {
+function StartupPage() {
   const api = startupApi();
   const { sid } = useParams();
 
@@ -32,4 +32,4 @@ function Startup() {
   );
 }
 
-export default Startup;
+export default StartupPage;
