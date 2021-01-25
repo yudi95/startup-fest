@@ -32,7 +32,7 @@ function Header() {
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <HeaderLinkButton to="/" activeOnlyWhenExact>
-          Empresas
+          StartUps
         </HeaderLinkButton>
         <HeaderLinkButton to="/ranking">
           Ranking
